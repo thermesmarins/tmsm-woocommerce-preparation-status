@@ -1,0 +1,14 @@
+.order-status.status-preparation {
+  background: #f8dda7;
+  color: #94660c;
+}
+
+.column-wc_actions a.preparation {
+  content: "\f18c" !important;
+  background: #f8dda7;
+  color: #94660c;
+  border-color: #94660c;
+}
+.column-wc_actions a.preparation:after {
+  content: "\f18c" !important;
+}
