@@ -126,6 +126,22 @@ class Tmsm_Woocommerce_Preparation_Status_Admin {
 	}
 
 	/**
+	 * WooCommerce: Rename order statuses in views filters
+	 *
+	 * @param $views array
+	 *
+	 * @return array
+	 */
+	public function woocommerce_rename_views_filters($views){
+		foreach($views as &$view){
+
+			echo $view;
+			$view = str_replace('In Preparation', _x( 'In Preparation', 'Order status', 'tmsm-woocommerce-preparation-status' ), $view);
+		}
+		return $views;
+	}
+
+	/**
 	 * Rename order statuses
 	 *
 	 * @param $statuses
@@ -186,8 +202,11 @@ class Tmsm_Woocommerce_Preparation_Status_Admin {
 
 		foreach( $_REQUEST['post'] as $order_id ) {
 			$order = new WC_Order( $order_id );
-			$order_note = __('Status changed to In Preparation', 'tmsm-woocommerce-preparation-status');
-			$order->update_status( 'preparation', $order_note, true );
+			if ( $order->has_status ( 'processing' ) ) {
+				$order_note = __('Status changed to In Preparation', 'tmsm-woocommerce-preparation-status');
+				$order->update_status( 'preparation', $order_note, true );
+			}
+
 		}
 
 		// of course using add_query_arg() is not required, you can build your URL inline

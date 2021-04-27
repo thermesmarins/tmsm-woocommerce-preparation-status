@@ -165,7 +165,7 @@ class Tmsm_Woocommerce_Preparation_Status {
 		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_filter( 'woocommerce_admin_order_actions', $plugin_admin, 'admin_order_actions_preparation', 20, 2 );
-
+		$this->loader->add_filter( 'views_edit-shop_order', $plugin_admin, 'woocommerce_rename_views_filters', 50, 1 );
 		$this->loader->add_filter( 'wc_order_statuses', $plugin_admin, 'rename_order_statuses', 500, 1 );
 
 		$this->loader->add_filter( 'bulk_actions-edit-shop_order', $plugin_admin, 'rename_bulk_actions', 50, 1 );
