@@ -162,11 +162,12 @@ class Tmsm_Woocommerce_Preparation_Status {
 		$plugin_admin = new Tmsm_Woocommerce_Preparation_Status_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_filter( 'woocommerce_admin_order_actions', $plugin_admin, 'admin_order_actions_preparation', 20, 2 );
 		$this->loader->add_filter( 'views_edit-shop_order', $plugin_admin, 'woocommerce_rename_views_filters', 50, 1 );
 		$this->loader->add_filter( 'wc_order_statuses', $plugin_admin, 'rename_order_statuses', 500, 1 );
+
 
 		$this->loader->add_filter( 'bulk_actions-edit-shop_order', $plugin_admin, 'rename_bulk_actions', 50, 1 );
 		$this->loader->add_filter( 'woocommerce_admin_order_preview_actions', $plugin_admin, 'admin_order_preview_actions', 50, 2 );
@@ -179,6 +180,10 @@ class Tmsm_Woocommerce_Preparation_Status {
 		$this->loader->add_action( 'woocommerce_reports_order_statuses', $plugin_admin, 'woocommerce_reports_order_statuses', 10, 1 );
 
 		$this->loader->add_filter( 'woocommerce_order_is_download_permitted', $plugin_admin, 'woocommerce_order_is_download_permitted', 10, 2 );
+
+		// Packing Invoice Slips
+		$this->loader->add_action( 'wpo_wcpdf_document_created_manually', $plugin_admin, 'wpo_wcpdf_document_created_manually', 500, 2 );
+
 	}
 
 	/**

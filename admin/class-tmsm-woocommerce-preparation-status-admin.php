@@ -10,6 +10,8 @@
  * @subpackage Tmsm_Woocommerce_Preparation_Status/admin
  */
 
+use WPO\WC\PDF_Invoices\Documents\Bulk_Document;
+
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -265,6 +267,8 @@ class Tmsm_Woocommerce_Preparation_Status_Admin {
 	}
 
 	/**
+	 * WooCommerce download is permitted? Yes
+	 *
 	 * @param $is_download_permitted bool
 	 * @param $order WC_Order
 	 *
@@ -275,6 +279,27 @@ class Tmsm_Woocommerce_Preparation_Status_Admin {
 			return true;
 		}
 		return $is_download_permitted;
+	}
+
+	/**
+	 * Packing Invoice Slips: automatically change status to preparation
+	 *
+	 * @param Bulk_Document $document
+	 * @param array         $order_ids
+	 */
+	public function wpo_wcpdf_document_created_manually( Bulk_Document $document, array $order_ids){
+
+		if(class_exists('WPO_WCPDF')){
+			foreach( $order_ids as $order_id ) {
+				$order = wc_get_order( $order_id );
+				if( ! empty($order )){
+					if($order->has_status('processing')){
+						$order->update_status( 'preparation' );
+					}
+				}
+			}
+		}
+
 	}
 
 }
