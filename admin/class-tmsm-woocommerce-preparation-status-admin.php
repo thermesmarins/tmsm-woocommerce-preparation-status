@@ -137,8 +137,8 @@ class Tmsm_Woocommerce_Preparation_Status_Admin {
 	public function woocommerce_rename_views_filters($views){
 		foreach($views as &$view){
 
-			echo $view;
 			$view = str_replace('In Preparation', _x( 'In Preparation', 'Order status', 'tmsm-woocommerce-preparation-status' ), $view);
+
 		}
 		return $views;
 	}

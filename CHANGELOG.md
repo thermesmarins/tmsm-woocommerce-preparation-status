@@ -1,3 +1,6 @@
+### 1.0.3: Avril 27th, 2021
+* Fix debug still active
+
 ### 1.0.2: Avril 27th, 2021
 * When downloading a single Invoice PDF, reload the admin view
 
