@@ -287,7 +287,7 @@ class Tmsm_Woocommerce_Preparation_Status_Admin {
 	 * @param Bulk_Document $document
 	 * @param array         $order_ids
 	 */
-	public function wpo_wcpdf_document_created_manually( Bulk_Document $document, array $order_ids){
+	public function wpo_wcpdf_document_created_manually( $document, array $order_ids){
 
 		if(class_exists('WPO_WCPDF')){
 			foreach( $order_ids as $order_id ) {
