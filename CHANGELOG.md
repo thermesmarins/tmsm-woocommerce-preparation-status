@@ -1,3 +1,6 @@
+### 1.0.4: September 23th, 2024
+* Add HPOS compatiblitie whith new hooks
+  
 ### 1.0.3: Avril 27th, 2021
 * Fix debug still active
 
